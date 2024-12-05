@@ -18,8 +18,8 @@ app = Flask(__name__)
 # OpenAI API Key Setup
 openai.api_key = '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'
 # Path to emotion recognition model
-MODEL_PATH = r'templates/model/FINALFACEMODEL.keras'
-
+MODEL_PATH = r'./templates/model/FINALFACEMODEL.keras'
+#test-syntax
 # Load emotion recognition model
 emotion_model = load_model(MODEL_PATH)
 emotion_labels = ['angry', 'disgust', 'sad', 'happy', 'neutral', 'fear', 'surprise']
