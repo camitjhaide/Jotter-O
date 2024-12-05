@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jotter~O</title>
+    <link rel="stylesheet" href="../static/css/data privacy.css">
+    <link rel="icon" href="../static/img/icon.png" type="image/png">
+
+</head>
+    <script>
+        // Make sure showContent is available globally
+        function showContent(language) {
+            // Hide all content
+            document.querySelectorAll('.content').forEach(content => {
+                content.style.display = 'none';
+            });
+            // Show content for the selected language
+            document.getElementById(language).style.display = 'block';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set default content view to English
+            showContent('english');
+        });
+    </script>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar__container">
+            <a href="index.html" class="navbar__logo">
+                <img src="{{ url_for('static', filename='img/Jotter~O Logo.png') }}" alt="Jotter~O Logo" class="navbar__logo-img">
+            </a>
+            <ul class="navbar__menu">
+                <li><a href="{{ url_for('home') }}#get-started" class="navbar__link">GET STARTED</a></li>
+                <li><a href="https://forms.office.com/r/na6ggnwraG" class="navbar__link">EVALUATION</a></li>
+                <li><a href="{{ url_for('data_privacy') }}" class="navbar__link">DATA PRIVACY</a></li>
+                <li><a href="{{ url_for('contact') }}" class="navbar__link">CONTACT US</a></li>    
+            </ul>                 
+    </nav>
+
+ <!-- Background -->
+<div class="background" style="background-image: url('../static/img/contact us bg.png'); height: 100vh; background-size: cover; background-position: center;">
+</div>
+
+    <div class="container">
+        <h1>Data Privacy Consent</h1>
+        <p>Your privacy is important to us. Please review the information below and download the file in your preferred language.</p>
+    
+        <div class="language-selector">
+            <button onclick="showContent('english')">English</button>
+            <button onclick="showContent('tagalog')">Tagalog (Filipino)</button>
+        </div>
+    
+        <div id="english" class="content" style="display: block;">
+            <h2>Informed Consent Form (English Version)</h2>
+            <p>
+                Please review the informed consent form in English. By clicking the link below, you will be redirected to OneDrive where the document is stored.
+            </p>
+            <a class="download-link" href="https://dlsudphl-my.sharepoint.com/:b:/g/personal/bkr0321_dlsud_edu_ph/ERno2oNcE31CkAkiEg0LHP8B_p9UCphTG4y10nCQS-rVsg?e=ylvC4U" target="_blank">
+                Open English Informed Consent Form on OneDrive
+            </a>
+        </div>
+    
+        <div id="tagalog" class="content" style="display: none;">
+            <h2>Pahintulot sa Pribadong Impormasyon (Tagalog)</h2>
+            <p>
+                Pakibasa ang pahintulot sa impormasyon sa Tagalog. Sa pamamagitan ng pag-click sa link sa ibaba, ire-redirect ka sa OneDrive kung saan nakaimbak ang dokumento.
+            </p>
+            <a class="download-link" href="https://dlsudphl-my.sharepoint.com/:b:/g/personal/bkr0321_dlsud_edu_ph/EV0HBFGiG6lBitdZJNEgQ1gBVEZdWfP05sRygwC-K61MaQ?e=h7fGLK" target="_blank">
+                Buksan ang Pahintulot sa Impormasyon (Tagalog) sa OneDrive
+            </a>
+        </div>
+    </div>
+<!-- Content -->
+<div class="container">
+    <h1>Informed Consent Form</h1>
+    <h2>Purpose of the Research</h2>
+    <p>
+        This study will explore the innovative use of the dimensional emotion model to enhance the detection of users' emotions. Unlike traditional methods that focus on basic emotions such as happiness, sadness, anger, and fear, the dimensional emotion model provides a more nuanced and comprehensive understanding of emotional states. This model considers emotions along continuous dimensions, such as valence (pleasantness) and arousal (intensity), allowing for a more precise and detailed recognition of the user's current emotional state.
+    </p>
+
+    <h2>Type of Research Intervention</h2>
+    <p>
+        The research paper is descriptive in nature. Respondents of the study are the college students of DLSU-Dasmariñas from 2024 to 2025. The study will use a questionnaire/survey as its primary method for gathering important information, such as:
+    </p>
+    <ul>
+        <li>Emotional Well-Being: Questions focused on assessing the students' current emotional state, stress levels, and overall well-being, which will be used to identify common emotional experiences and challenges.</li>
+        <li>Usage and Perception of AI Tools: Gathering insights on students' familiarity with and perceptions of AI companions, including any past usage or openness to using digital tools for mental and emotional support.</li>
+        <li>Interaction with JOTTER~O: Understanding participants' experiences with the AI diary, including ease of use, comfort in sharing emotions, and perceived effectiveness in supporting emotional well-being.</li>
+        <li>Feedback and Suggestions: Collecting participants' feedback on how the AI companion could be improved to better meet their needs and expectations.</li>
+    </ul>
+    <p>
+        The collected data will be analyzed to identify patterns and trends in emotional well-being among students and to evaluate the potential of AI-based tools in providing emotional support. This descriptive approach aims to give a comprehensive overview of the student experience, guiding future enhancements to AI companions like JOTTER~O for improved well-being support.
+    </p>
+
+    <h2>Participant Selection</h2>
+    <p>
+        Participants for this study are selected from the college student population of De La Salle University-Dasmariñas (DLSU-D) for the academic years 2024-2025. The selection process ensures that no individuals from vulnerable groups, such as minors or those with specific mental health conditions, are included in the study. This is to safeguard the well-being of all participants.
+    </p>
+
+    <h2>Voluntary Participation and Right to Refuse/Withdraw</h2>
+    <p>
+        College students of DLSU-D may opt not to participate if they find disclosing past and current information uncomfortable. Participation in this study is entirely voluntary. Participants have the right to refuse to take part in or withdraw from the study at any time without providing any explanation and without facing any consequences. All data collected will be used solely for research purposes, and participant confidentiality will be strictly maintained.
+    </p>
+    
+    <h2>Procedures</h2>
+    <p>
+        If you agree to participate in this study, you will be asked to:  
+    <li> Interact with the AI companion regularly over [3 consecutive days].</li>
+    <li> Allow the AI to measure and record your emotional responses during interactions.</li>
+    <li>Use the journaling feature to document your feelings and experiences. </li>
+    <li>Engage in conversations with the AI, including sharing your thoughts and rants.</li>
+    </p>
+
+    <h2>Duration</h2>
+    <p>
+        The survey will be accessible for one week, allowing participants flexibility in choosing when to begin. However, they are required to complete three consecutive days of interaction with the AI within this one-week period. 
+    </p>
+
+    <h2>Risk</h2>
+    <p>
+        There are minimal risks associated with this study. Some participants may feel uncomfortable sharing personal thoughts and feelings with the AI. You may choose to skip any questions or discontinue the use of the AI at any time without penalty.
+    </p>
+
+    <h2>Benefits</h2>
+    <p>
+        While there may be no direct benefits to you, your participation will contribute to a better understanding of how AI companions can support emotional well-being in college students. 
+    </p>
+
+    <h2>Reimbursements</h2>
+    <p>
+        Participants will not receive any payments or reimbursements whatsoever for their participation in this tracer study. 
+    </p>
+
+    <h2>Confidentiality</h2>
+    <p>
+        All information collected in this study will be kept confidential. Data will be stored securely and only the research team will have access to it. Your identity will not be revealed in any reports or publications resulting from this study. Confidentiality applies to the following stages:  
+    <li>Preliminaries to research, </li>
+    <li>During data collection, analysis and dispensation, </li>
+    <li>After study closure and sharing of results.</li>
+        This tracer study is compliant to Republic Act 10173 or the Data Privacy Act of 2012. 
+    </p>
+
+    <h2>Sharing the Result</h2>
+    <p>
+        The results of this study may be, in the future, shared through similar researches. Moreover, the possibility of the research to be published and to be presented in conferences are high. The raw data, however, will not be shared due to data privacy, unless a permission is granted by the participants. 
+    </p>
+
+    <h2>Right to Refuse or Withdraw</h2>
+    <p>
+        Participation in this descriptive study is voluntary and includes the right to withdraw. Participants will have the opportunity to review the purpose and content of the tracer study to help in decision making whether to participate or not, or to withdraw participation.   
+    </p>
+
+    <h2>Disclosure Statement</h2>
+    <p>
+        The researchers declare that they have no conflict of interest and are obliged to abide by the rules of data privacy.
+    </p>
+    </div>
+
+    <script>
+        function showContent(language) {
+            document.getElementById('english').style.display = language === 'english' ? 'block' : 'none';
+            document.getElementById('tagalog').style.display = language === 'tagalog' ? 'block' : 'none';
+        }
+    </script>
+
+    <!-- Background -->
+    <div class="background" style="background-image: url('img/contact_us_bg.png'); height: 100vh; background-size: cover; background-position: center;">
+    </div>
+</body>
+</html>

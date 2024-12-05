@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jotter~O</title>
+    <link rel="stylesheet" href="../static/css/contact.css">
+    <link rel="icon" href="../static/img/icon.png" type="image/png">
+
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar__container">
+            <a href="index.html" class="navbar__logo">
+                <img src="{{ url_for('static', filename='img/Jotter~O Logo.png') }}" alt="Jotter~O Logo" class="navbar__logo-img">
+            </a>
+            <ul class="navbar__menu">
+                <li><a href="{{ url_for('home') }}#get-started" class="navbar__link">GET STARTED</a></li>
+                <li><a href="https://forms.office.com/r/na6ggnwraG" class="navbar__link">EVALUATION</a></li>
+                <li><a href="{{ url_for('data_privacy') }}" class="navbar__link">DATA PRIVACY</a></li>
+                <li><a href="{{ url_for('contact') }}" class="navbar__link">CONTACT US</a></li>   
+            </ul>                  
+    </nav>
+
+    <!-- Background -->
+    <div class="background" style="background-image: url('../static/img/contact us bg.png'); height: 100vh; background-size: cover; background-position: center;">
+        <section class="contact-section" style="background-image: url('static/img/contact\ us\ bg.png')">
+            <h2 class="contact-section__header">We'd love to hear from you!</h2>
+            <p class="contact-section__subtext">Feel free to reach out to us through the options below.</p>
+        
+            <div class="researchers">
+                <div class="researcher">
+                    <img src="../static/img/Kath.jpg" alt="Katherine Nicole R. Bayan" class="researcher__photo">
+                    <p class="researcher__name">Katherine Nicole R. Bayan</p>
+                    <p class="researcher__email">bkr0321@dlsud.edu.ph</p>
+                </div>
+                <div class="researcher">
+                    <img src="../static/img/James.jpg" alt="James Carlo D. Alegria" class="researcher__photo">
+                    <p class="researcher__name">James Carlo D. Alegria</p>
+                    <p class="researcher__email">ajd0198@dlsud.edu.ph</p>
+                </div>
+                <div class="researcher">
+                    <img src="../static/img/Jhaide.jpg" alt="Jhaide Kyle M. Camit" class="researcher__photo">
+                    <p class="researcher__name">Jhaide Kyle M. Camit</p>
+                    <p class="researcher__email">cjm1454@dlsud.edu.ph</p>
+                </div>
+            </div>
+        
+            <div class="adviser">
+                <h3>Research Adviser</h3>
+                <p class="adviser__info"><b>Ms. Tita R. Herradura</b></p>
+            </div>
+        
+            <div class="frequentlyAskedQuestions">
+                <h3><strong><b>Frequently Asked Questions</b></strong></h3>
+                <br>
+                <p>Explore our FAQ section for more personalized support.</p>
+                <ul class="faq-list">
+                    <li><strong>How to use JOTTER~O?</strong> JOTTER~O is designed to support your well-being through its advanced multimodal technology, including facial recognition, NLP, and speech recognition. Simply interact with the app by talking or engaging with it to track and understand your emotions.</li>
+                    <li><strong>What is JOTTER~O?</strong> JOTTER~O is an AI diary companion that helps students maintain and improve their emotional health by providing insights based on emotional detection and analysis using innovative technology.</li>
+                    <li><strong>What is the privacy policy when using JOTTER~O?</strong> Your privacy is important to us. By using JOTTER~O, you consent to the collection and analysis of data, such as facial expressions and voice inputs, solely for the purpose of enhancing your well-being. Please review our full privacy policy to understand how we protect your data.</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+</body>
+</html>

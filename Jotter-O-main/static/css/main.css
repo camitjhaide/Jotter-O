@@ -1,0 +1,252 @@
+/* Global Reset and Variables */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-bg: #36131d;
+    --secondary-bg: #472123;
+    --accent-color: #fec4c3;
+    --text-color: white;
+    --border-color: #5a1e2c;
+}
+
+/* Fonts */
+@font-face {
+    font-family: raleway_f;
+    src: url(../fonts/raleway-regular.woff2);
+}
+
+@font-face {
+    font-family: raleway_f;
+    src: url(../fonts/raleway-black.woff2);
+    font-weight: 900;
+}
+
+/* Body Styling */
+body {
+    background-color: var(--primary-bg);
+    font-family: raleway_f, sans-serif;
+    line-height: 1.55;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Navbar Styles */
+.navbar {
+    width: 100%;
+    background-color: #36151e;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    padding: 0.75rem 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar__logo-img {
+    height: 40px;
+}
+
+.navbar__menu {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+.navbar__link {
+    text-decoration: none;
+    font-size: 1rem;
+    color: #fff;
+    transition: color 0.3s ease;
+}
+
+.navbar__link:hover {
+    text-shadow: 0 0 5px var(--accent-color),
+                 0 0 10px var(--accent-color),
+                 0 0 20px var(--accent-color),
+                 0 0 50px var(--accent-color);
+}
+
+.navbar__logo-img:hover {
+    filter: drop-shadow(0 0 5px var(--accent-color))
+            drop-shadow(0 0 10px var(--accent-color))
+            drop-shadow(0 0 50px var(--accent-color));
+}
+
+/* Background Image */
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 1;
+    background-image: url('../static/img/main bg.png');
+    background-size: cover;
+    background-position: center;
+}
+
+/* Layout Container */
+.layout-container {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    max-width: 1200px;
+    z-index: 2;
+    margin-top: 100px; /* Offset for navbar */
+    gap: 20px;
+}
+
+/* Video Feed Styles */
+.video_feed {
+    flex: 1;
+    background-color: var(--secondary-bg);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    color: var(--text-color);
+}
+
+.video_feed h2 {
+    color: var(--accent-color);
+    margin-bottom: 20px;
+}
+
+.video_feed img {
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+.video_feed p {
+    margin-top: 20px;
+}
+
+/* Chat Container Styles */
+.chat-container {
+    flex: 1;
+    background-color: var(--secondary-bg);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+    z-index: 4;
+}
+
+.chat-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--accent-color);
+    text-shadow: 0 0 10px var(--accent-color);
+}
+
+.chat-box {
+    height: 300px;
+    overflow-y: auto;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 10px;
+    background-color: var(--border-color);
+    margin-bottom: 20px;
+}
+
+.chat-box p {
+    margin: 5px 0;
+}
+
+.chat-box .user-message {
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
+.chat-box .bot-response {
+    color: var(--text-color);
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.input-container input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    background-color: var(--secondary-bg);
+    color: var(--text-color);
+}
+
+.input-container input[type="text"]::placeholder {
+    color: #aaa;
+}
+
+.button-container {
+    display: flex;
+    gap: 10px;
+}
+
+.button-container button {
+    padding: 10px 20px;
+    background-color: var(--primary-bg);
+    color: var(--text-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.button-container button:hover {
+    background-color: var(--border-color);
+}
+
+/* Date Picker */
+.date-picker {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.date-picker label {
+    margin-right: 10px;
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+.date-picker input {
+    padding: 5px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    background-color: var(--secondary-bg);
+    color: var(--text-color);
+}
+
+/* Download Button */
+.download-button {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.download-button button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--primary-bg);
+    color: var(--text-color);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.download-button button:hover {
+    background-color: var(--border-color);
+}

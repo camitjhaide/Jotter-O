@@ -1,0 +1,197 @@
+/* Global Reset and Variables */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --index: calc(1vw + 1vh);
+    --text: #ffffff;
+    --transition: transform .75s cubic-bezier(.075, 0.5, 0, 1);
+}
+
+/* Fonts */
+@font-face {
+    font-family: raleway_f;
+    src: url(../fonts/raleway-regular.woff2);
+}
+
+@font-face {
+    font-family: raleway_f;
+    src: url(../fonts/raleway-black.woff2);
+    font-weight: 900;
+}
+
+body {
+    background-color: #733348;
+    font-family: raleway_f, sans-serif;
+    line-height: 1.55;
+    background-image: url('img/dungeon.png'); /* Background image */
+    background-size: cover;
+    background-position: center;
+    height: 100vh; /* Full-screen height */
+}
+
+/* Navbar Styles */
+.navbar {
+    width: 100%;
+    background-color: #36151e;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    padding: 0.75rem 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar__logo-img {
+    height: 40px;
+}
+
+.navbar__menu {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+.navbar__link {
+    text-decoration: none;
+    font-size: 1rem;
+    color: #fff;
+    transition: color 0.3s ease;
+}
+
+.navbar__link:hover {
+    text-shadow: 0 0 5px #fec4c3,
+                 0 0 10px #fec4c3,
+                 0 0 20px #fec4c3,
+                 0 0 50px #fec4c3;
+}
+
+.navbar__logo-img:hover{
+    filter: drop-shadow(0 0 5px #fec4c3)
+            drop-shadow(0 0 10px #fec4c3)
+            drop-shadow(0 0 50px #fec4c3)
+ }
+
+ /* Researchers Section */
+.researchers {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Center vertically */
+    gap: 2rem;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    padding-top: 5rem;
+}
+
+.researcher {
+    text-align: center;
+}
+
+.researcher__photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    box-shadow: 0 0 10px #fec4c3;
+    object-fit: cover;
+}
+
+.researcher__photo:hover{
+    filter: drop-shadow(0 0 5px #fec4c3)
+            drop-shadow(0 0 10px #fec4c3)
+            drop-shadow(0 0 50px #fec4c3)
+}
+
+.researcher__name {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+/* Adviser Section */
+.adviser {
+    text-align: center; /* Ensures consistent centering for the adviser section */
+    margin-bottom: 2rem;
+}
+
+.adviser h3 {
+    margin-bottom: 0.5rem;
+}
+
+.adviser .researcher__photo {
+    margin-bottom: 1rem; /* Reuse the photo styling for consistency */
+}
+
+/* Contact Section */
+.contact-section {
+    display: flex;
+    flex-direction: column; /* Stacks the content vertically */
+    align-items: center;    /* Centers horizontally */
+    justify-content: center; /* Centers vertically within the remaining space */
+    text-align: center;     /* Ensures text is centered */
+    padding: 7rem 2rem;     /* Adds padding: 5rem on top/bottom and 2rem on sides */
+    background: url('static/img/contact us bg.png') no-repeat center center/cover;
+    border-radius: 10px;
+    color: #eddede;
+    box-shadow: 0 0 15px #fec4c3;
+    min-height: 100vh;      /* Ensures section takes at least the full viewport height */
+    box-sizing: border-box; /* Ensures padding is included in height calculations */
+}
+.contact-section__header {
+    font-family: raleway_f, sans-serif; /* Same font as the rest */
+    font-weight: 900; /* Bold weight to match the header style */
+    font-size: 2.5rem; /* Adjust the size as needed */
+    color: #ffffff; /* Matches the text color */
+    text-align: center; /* Centers the text */
+    margin-bottom: 1rem; /* Add space below */
+}
+
+/* Additional Content Section */
+.additional-content {
+    margin-top: 3rem;
+    padding: 2rem;
+    background: url('img/contact us bg.png') no-repeat center center/cover;
+    border-radius: 10px;
+    color: #eddede;
+    text-align: center;
+}
+
+.faq-list {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 1rem;
+}
+
+.faq-list li {
+    margin-bottom: 1rem;
+    text-align: left;
+    padding: 1rem;
+    background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent background for readability */
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+h3{
+    font-size: 28px;
+}
+.frequentlyAskedQuestions {
+    margin-top: 3rem;
+    padding: 2rem;
+    text-align: center;
+    color: #eddede;
+    background: #36151e; /* Adds the solid background color to the parent */
+    border-radius: 15px; /* Optional: Adds rounded corners to the container */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Optional: Adds shadow for depth */
+}
+
+.frequentlyAskedQuestions h3 {
+    font-size: 2rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+}

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jotter~O - Emotion and Chat</title>
+    <link rel="stylesheet" href="../static/css/main.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar__container">
+            <a href="index.html" class="navbar__logo">
+                <img src="{{ url_for('static', filename='img/Jotter~O Logo.png') }}" alt="Jotter~O Logo" class="navbar__logo-img">
+            </a>
+            <ul class="navbar__menu">
+                <li><a href="{{ url_for('home') }}#get-started" class="navbar__link">GET STARTED</a></li>
+                <li><a href="https://forms.office.com/r/na6ggnwraG" class="navbar__link">EVALUATION</a></li>
+                <li><a href="{{ url_for('data_privacy') }}" class="navbar__link">DATA PRIVACY</a></li>
+                <li><a href="{{ url_for('contact') }}" class="navbar__link">CONTACT US</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Background -->
+    <div class="background" style="background-image: url('../static/img/main\ bg.png'); height: 100vh; background-size: cover; background-position: center;">
+    </div>
+
+    <!-- Main Content -->
+    <div class="layout-container">
+        <!-- Video Feed -->
+        <div class="video_feed">
+            <h2>Real-Time Emotion Detection</h2>
+            <img src="/video_feed" alt="Video Feed">
+            <p>
+                <img src="{{ url_for('static', filename='img/Jotter~O Logo.png') }}" alt="Jotter~O small" class="navbar__logo-img">
+            </p>
+        </div>
+
+        <!-- Chatbot -->
+        <div class="chat-container">
+            <h2>Chat with Jotter~O</h2>
+            <div id="response" class="chat-box"></div>
+            <div class="input-container">
+                <input type="text" id="user-input" placeholder="Type your message here...">
+                <div class="button-container">
+                    <button onclick="sendMessage()">Send</button>
+                    <button id="record-btn" onclick="toggleRecording()">🎤</button>
+                </div>
+            </div>
+            <!-- Date Picker -->
+            <div class="date-picker">
+                <label for="date-input">Select Date:</label>
+                <input type="date" id="date-input">
+            </div>
+            <!-- Download Button -->
+            <div class="download-button">
+                <button onclick="downloadData()">Download Interaction</button>
+            </div>
+        </div>
+    </div>
+
+<script>
+    let mediaRecorder;
+    let audioChunks = [];
+    let isRecording = false;
+    const interactionData = {
+        date: "",
+        videoResults: [],
+        chatHistory: []
+    };
+
+    // Mock function to fetch emotion results from video feed
+    async function fetchVideoResults() {
+        // Replace with actual API call to your backend that processes the video feed
+        try {
+            const response = await fetch('/video_feed/results'); // Adjust the endpoint if necessary
+            const data = await response.json();
+            return data.emotions; // Assumes backend sends { emotions: [...] }
+        } catch (error) {
+            console.error("Error fetching video feed results:", error);
+            return ["No video results available"]; // Fallback in case of error
+        }
+    }
+
+    async function toggleRecording() {
+        const recordButton = document.getElementById("record-btn");
+
+        if (!isRecording) {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            mediaRecorder = new MediaRecorder(stream);
+            audioChunks = [];
+            mediaRecorder.ondataavailable = event => audioChunks.push(event.data);
+            mediaRecorder.onstop = async () => {
+                const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+                const formData = new FormData();
+                formData.append('audio', audioBlob, "recorded_audio.webm");
+
+                const response = await fetch('/whisper', {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                const data = await response.json();
+                document.getElementById("user-input").value = data.transcription;
+            };
+
+            mediaRecorder.start();
+            recordButton.textContent = "🛑 Stop";
+            isRecording = true;
+        } else {
+            mediaRecorder.stop();
+            recordButton.textContent = "🎤";
+            isRecording = false;
+        }
+    }
+
+    async function sendMessage() {
+        const userMessage = document.getElementById("user-input").value;
+        const responseElement = document.getElementById("response");
+
+        if (userMessage.trim() === "") return;
+
+        // Append user's message
+        interactionData.chatHistory.push({ sender: "User", message: userMessage });
+        responseElement.innerHTML += `<p class="user-message">You: ${userMessage}</p>`;
+
+        // Fetch bot response
+        const response = await fetch('/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: userMessage })
+        });
+        const data = await response.json();
+
+        // Append bot's response
+        interactionData.chatHistory.push({ sender: "Jotter~O", message: data.response });
+        responseElement.innerHTML += `<p class="bot-response">Jotter~O: ${data.response}</p>`;
+        responseElement.scrollTop = responseElement.scrollHeight;
+
+        document.getElementById("user-input").value = "";
+    }
+
+    async function downloadData() {
+    const dateInput = document.getElementById("date-input").value;
+    interactionData.date = dateInput || new Date().toISOString().split('T')[0];
+
+    // Fetch video feed results
+    const videoResults = await fetchVideoResults();
+    interactionData.videoResults = videoResults; // Store the fetched results in interactionData
+
+    // Create and download the text file
+    const blob = new Blob([JSON.stringify(interactionData, null, 2)], { type: "text/plain" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = `interaction_${interactionData.date}.txt`;
+    link.click();
+}
+
+
+    async function fetchVideoResults() {
+    try {
+        const response = await fetch('/video_feed/results'); // Adjust the endpoint if necessary
+        const data = await response.json();
+        console.log("Video Feed Results: ", data); // Debugging line to check the response
+        return data.emotions || []; // Ensure it returns an array
+    } catch (error) {
+        console.error("Error fetching video feed results:", error);
+        return ["No video results available"]; // Fallback
+    }
+}
+
+
+</script>
+
+
+</body>
+</html>

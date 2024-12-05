@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jotter~O</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <script src="../static/libs/gsap/gsap.min.js" defer></script>
+    <script src="../static/libs/gsap/ScrollTrigger.min.js"></script>
+    <script src="../static/libs/gsap/ScrollSmoother.min.js"></script>
+    <script src="../static/libs/script.js" defer></script>
+    <link rel="icon" href="../static/img/icon.png" type="image/png">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar__container">
+            <a href="index.html" class="navbar__logo">
+                <img src="{{ url_for('static', filename='img/Jotter~O Logo.png') }}" alt="Jotter~O Logo" class="navbar__logo-img">
+            </a>
+            <ul class="navbar__menu">
+                <li><a href="{{ url_for('home') }}#get-started" class="navbar__link">GET STARTED</a></li>
+                <li><a href="https://forms.office.com/r/na6ggnwraG" class="navbar__link">EVALUATION</a></li>
+                <li><a href="{{ url_for('data_privacy') }}" class="navbar__link">DATA PRIVACY</a></li>
+                <li><a href="{{ url_for('contact') }}" class="navbar__link">CONTACT US</a></li>  
+            </ul>                   
+    </nav>
+
+    <!-- Page Content -->
+    <div class="wrapper">
+        <div class="content">
+            <header class="main-header">
+                <div class="layers">
+                    <div class="layer__header">
+                        <div class="layers__caption">AI Diary Companion</div>
+                        <div class="layers__title">JOTTER~O</div>
+                        <!-- START Button (with z-index to bring it in front of the layers) -->
+
+                    </div>
+                    <!-- Layers (background images) -->
+                    <div class="layer layers__title" style="background-image: url(../static/img/layer-middle.png);"></div>
+                    <div class="layer layers__base" style="background-image: url(../static/img/layer-base.png);"></div>
+                    <div class="layer icon" style="background-image: url(../static/img/circle.png);"></div>
+                    <div class="layer layers__front" style="background-image: url(../static/img/layer-front.png);"></div>
+                </div>
+            </header>
+            
+        
+            <article class="main-article" style="background-image: url(../static/img/dungeon.png);">
+                <div class="main-article__contact">
+                    <h2 id="get-started" class="main-article__header">Get Started with JOTTER~O</h2>
+                    <p class="main-article__paragraph">
+                        Jotter~O is your AI diary companion, designed to support your well-being and mental health. Explore magical realms of self-reflection, mood tracking, and personalised insights.
+                    </p>
+                    <a href="{{ url_for('main') }}">
+                        <button class="shadow__btn">
+                            TRY NOW
+                        </button>
+                    </a>
+                </div>
+            </article>
+            
+        </div>
+    </div>
+</body>
+</html>
