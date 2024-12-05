@@ -7,6 +7,9 @@ import openai
 from io import BytesIO
 from faster_whisper import WhisperModel
 import logging
+from deepface import DeepFace
+import cv2
+import numpy as np
 
 
 # Setup logging
@@ -16,12 +19,13 @@ logging.basicConfig(level=logging.DEBUG)
 app = Flask(__name__)
 
 # OpenAI API Key Setup
-openai.api_key = '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'
+openai.api_key = "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"
 # Path to emotion recognition model
-MODEL_PATH = r'templates/model/FINALFACEMODEL.keras'
+from deepface import DeepFace
+import cv2
+import numpy as np
 
-# Load emotion recognition model
-emotion_model = load_model(MODEL_PATH)
+# Emotion labels for mapping
 emotion_labels = ['angry', 'disgust', 'sad', 'happy', 'neutral', 'fear', 'surprise']
 
 # Function to map emotions to valence and arousal
@@ -37,51 +41,62 @@ def get_valence_arousal(emotion):
     }
     return emotion_map.get(emotion, (0.5, 0.5))
 
-# Analyze emotions from a frame
-def analyze_emotion(frame, model):
-    resized_frame = cv2.resize(frame, (224, 224))
-    img_array = img_to_array(resized_frame) / 255.0
-    img_array = np.expand_dims(img_array, axis=0)
-    predictions = model.predict(img_array)
-    return predictions[0]
+# Analyze emotions using DeepFace (VGGFace)
+def analyze_emotion(frame):
+    try:
+        # Save the frame temporarily for DeepFace analysis
+        temp_image_path = "temp_frame.jpg"
+        cv2.imwrite(temp_image_path, frame)
+
+        # Use DeepFace to analyze emotion
+        analysis = DeepFace.analyze(img_path=temp_image_path, actions=['emotion'], enforce_detection=False)
+        dominant_emotion = analysis['dominant_emotion']
+        emotion_score = analysis['emotion'][dominant_emotion]
+        return dominant_emotion, emotion_score
+    except Exception as e:
+        print(f"Error analyzing emotion: {str(e)}")
+        return None, None
 
 # Generate frames for the live feed
 def generate_frames():
     face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
     cap = cv2.VideoCapture(0)
-    
+
     while True:
         ret, frame = cap.read()
         if not ret:
             break
-        
+
         gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         faces = face_cascade.detectMultiScale(gray_frame, scaleFactor=1.1, minNeighbors=5)
-        
+
         if len(faces) > 0:
+            # Analyze the largest face detected
             largest_face = max(faces, key=lambda rect: rect[2] * rect[3])  # Largest face by area
             (x, y, w, h) = largest_face
-            
+
+            # Draw rectangle around the face
             cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
             face_roi = frame[y:y + h, x:x + w]
-            emotion_data = analyze_emotion(face_roi, emotion_model)
-            
-            if emotion_data is not None:
-                dominant_emotion = np.argmax(emotion_data)
-                emotion = emotion_labels[dominant_emotion]
-                emotion_score = float(emotion_data[dominant_emotion])
+
+            # Analyze the emotion of the face
+            emotion, emotion_score = analyze_emotion(face_roi)
+
+            if emotion:
                 valence, arousal = get_valence_arousal(emotion)
-                
+
                 # Display emotion, valence, and arousal on frame
                 cv2.putText(frame, f'Emotion: {emotion} ({emotion_score:.2f})', 
                             (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
                 cv2.putText(frame, f'Valence: {valence:.2f}, Arousal: {arousal:.2f}', 
                             (10, 70), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
-        
+
+        # Encode the frame and yield it
         ret, buffer = cv2.imencode('.jpg', frame)
         frame = buffer.tobytes()
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+
 
 # Routes for Flask
 
